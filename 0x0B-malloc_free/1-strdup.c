@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include "main.h"
 /**
- * *_stdrup - copies the string given as parameter
+ * *_strdup - copies the string given as parameter
  *
  * Return: pointer to the copied string (success), null eroro
  */
