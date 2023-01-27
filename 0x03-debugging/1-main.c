@@ -1,47 +1,25 @@
-#include <stdio.h>                                                                                                                            
+#include <stdio.h>
 
-                                                                                                                                              
+/**
+ * main - causes an infinite loop
+ * Return: 0
+ */
+int main(void)
+{
+	int i;
 
-/**                                                                                                                                           
- *
- *  * main - causes an infinite loop                                                                                                             
- *
- *   * Return:0                                                                                                                                   
- *
- *    */                                                                                                                                           
+	printf("infinite loop incoming :(\n");
 
-                                                                                                                                              
+	i = 0;
+	/**
+	 * while (i < 10)
+	 * {
+	 *     putchar(i);
+	 *
+	 *  }
+	 */
+	printf("infinite loop avoided! \\o/\n");
 
-int main(void)                                                                                                                                
+	return (0);
+}
 
-{                                                                                                                                             
-
-	        int i;                                                                                                                                
-
-		                                                                                                                                              
-
-		        printf("print loop incoming :(\n");                                                                                                   
-
-			                                                                                                                                              
-
-			        i = 0;                                                                                                                                
-
-				        /**                                                                                                                                   
-					 *
-					 *          * while (i < 10)                                                                                                                     
-					 *
-					 *                   * {                                                                                                                                  
-					 *
-					 *                            *     putchar(i);                                                                                                                    
-					 *
-					 *                                     * }                                                                                                                                  
-					 *
-					 *                                              */                                                                                                                                   
-
-				        printf("infinite loop avoided: \\o/\");                                                                                               
-
-						                                                                                                                                              
-
-}                                                                                                                                             
-
-                    
