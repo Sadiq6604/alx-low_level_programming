@@ -1,7 +1,9 @@
 #include "lists.h"
+
 /**
- * listint_t *insert_nodeint_at_index - delete
- * the node at a given index of listint_t list
+ * int delete_nodeint_at_index - delete the node
+ * at a given index of listint_t list.
+ *
  * @head: a pointer to the address of the listin=t list
  * @index: the index of the node to be deleted  at 0;
  *
