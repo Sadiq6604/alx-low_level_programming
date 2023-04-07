@@ -1,79 +1,53 @@
 #include "hash_tables.h"
 
 /**
- * hash_table_set - Put a value into hassh tabl3
- * @ht: The hash table struct
- * @key: The key used to find the value
- * @value: The value to add
- * Return: 1 on success, 0 on fail
- **/
+ * hash_table_set - Add or update an element in a hash table.
+ * @ht: A pointer to the hash table.
+ * @key: The key to add - is not an empty string.
+ * @value: The value associated with key.
+ *
+ * Return: Upon failure - 0.
+ *         Otherwise - 1.
+ */
 int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
-	unsigned long int index;
-	hash_node_t *node;
-	int pass_fail;
+	hash_node_t *new;
+	char *value_copy;
+	unsigned long int index, i;
 
-	if (ht == NULL)
+	if (ht == NULL || key == NULL || *key == '\0' || value == NULL)
 		return (0);
-	pass_fail = 1;
-	index = key_index((unsigned char *) key, ht->size);
-	node = malloc(sizeof(hash_node_t));
-	if (node == NULL)
+
+	value_copy = strdup(value);
+	if (value_copy == NULL)
 		return (0);
-	if (ht->array[index] == NULL)
-	{
-		ht->array[index] = node;
-		node->key = strdup(key);
-		if (node->key == NULL)
-			return (0);
-		node->value = strdup(value);
-		if (node->value == NULL)
-			return (0);
-		node->next = NULL;
-	}
-	else
-		pass_fail = check_list((char *) key, ht, index, (char *) value);
-	return (pass_fail);
-}
 
-/**
- * check_list - check a list at the key's index for the key
- * @key: Key to look for
- * @ht: Hash table to look through
- * @index: Index of the hashed key value
- * @value: The value associated with the key to add
- * Return: 1 on success, 0 for failure
- **/
-int check_list(char *key, hash_table_t *ht,
-	       unsigned long int index, char *value)
-{
-	hash_node_t *current_node;
-	hash_node_t *new_node;
-
-	current_node = ht->array[index];
-	while (current_node != NULL)
+	index = key_index((const unsigned char *)key, ht->size);
+	for (i = index; ht->array[i]; i++)
 	{
-		if (strcmp(key, current_node->key) == 0)
+		if (strcmp(ht->array[i]->key, key) == 0)
 		{
-			current_node->value = strdup(value);
-			if (current_node->value == NULL)
-				return (0);
+			free(ht->array[i]->value);
+			ht->array[i]->value = value_copy;
 			return (1);
 		}
-		current_node = current_node->next;
 	}
-	current_node = ht->array[index];
-	new_node = malloc(sizeof(hash_node_t));
-	if (new_node == NULL)
+
+	new = malloc(sizeof(hash_node_t));
+	if (new == NULL)
+	{
+		free(value_copy);
 		return (0);
-	new_node->next = current_node;
-	new_node->key = strdup(key);
-	if (new_node->key == NULL)
+	}
+	new->key = strdup(key);
+	if (new->key == NULL)
+	{
+		free(new);
 		return (0);
-	new_node->value = strdup(value);
-	if (new_node->value == NULL)
-		return (0);
-	ht->array[index] = new_node;
+	}
+	new->value = value_copy;
+	new->next = ht->array[index];
+	ht->array[index] = new;
+
 	return (1);
 }
-
