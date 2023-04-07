@@ -2,7 +2,7 @@
 
 /**
  * hash_table_set - insert a key, value pair to a hash table.
- * @hat: hash table to insert to.
+ * @ht: hash table to insert to.
  * @key: key
  * @value: value to be stored at that key.
  *
