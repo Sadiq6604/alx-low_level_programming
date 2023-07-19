@@ -1,25 +1,25 @@
 #include "search_algos.h"
 
 /**
- * linear_search - Search linearly through an array for a value
- * @array: Array to search
- * @size: The size of the array
- * @value: The value to be searched through
- * Return: First index that the value is found, -1 if value not found
- **/
+ * linear_search - searches for a value in a sorted array of integers
+ * @array: array of integers
+ * @size: size of array
+ * @value: value to search for
+ * Return: index of value or -1 if not found
+ */
+
+
 int linear_search(int *array, size_t size, int value)
 {
-	size_t i;
+	size_t inc;
 
 	if (array == NULL)
 		return (-1);
-	i = 0;
-	while (i < size)
+	for (inc = 0; inc < size; inc++)
 	{
-		printf("Value checked array[%lu] = [%d]\n", i, array[i]);
-		if (array[i] == value)
-			return (i);
-		i++;
+		printf("Value checked array[%ld] = [%d]\n", inc, array[inc]);
+		if (array[inc] == value)
+			return (inc);
 	}
 	return (-1);
 }
